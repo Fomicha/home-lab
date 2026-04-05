@@ -1,0 +1,10 @@
+# Secrets - never commit real credentials
+config/secrets.h
+
+# macOS
+.DS_Store
+
+# Arduino IDE
+build/
+*.elf
+*.bin
