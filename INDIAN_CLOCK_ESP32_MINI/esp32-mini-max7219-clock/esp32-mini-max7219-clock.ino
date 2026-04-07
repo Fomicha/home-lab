@@ -6,6 +6,7 @@
 #include <SPI.h>
 #include <DHT.h>
 #include <PubSubClient.h>
+#include <ArduinoOTA.h>
 
 #include "Font_Data.h"
 
@@ -337,6 +338,7 @@ void connectToWiFi(const char* ssid, const char* password) {
     Serial.println("\n[WiFi] Підключено");
     DEBUG_PRINTLN("[WiFi] IP: ");
     DEBUG_PRINTLN(WiFi.localIP());
+    Serial.printf("[CLOCK_IP] %s\n", WiFi.localIP().toString().c_str());
     showLoader(LOADER_STATIC_TEXT, "OK!", 2000);
   } else {
     DEBUG_PRINTLN("\n[WiFi] Помилка підключення!");
@@ -437,6 +439,10 @@ void setup(void) {
   connectToWiFi(ssid, password);
   getTimeNTP();
 
+  // OTA setup
+  ArduinoOTA.setHostname("homelab-clock");
+  ArduinoOTA.begin();
+
   // MQTT setup
   mqtt.setServer(MQTT_HOST, MQTT_PORT);
   mqtt.setBufferSize(1024);
@@ -473,8 +479,9 @@ void loop(void) {
 
   P.displayAnimate();
 
-  // MQTT maintenance
+  // OTA + MQTT maintenance
   if (WiFi.status() == WL_CONNECTED) {
+    ArduinoOTA.handle();
     if (!mqtt.connected()) connectMQTT();
     mqtt.loop();
   }
