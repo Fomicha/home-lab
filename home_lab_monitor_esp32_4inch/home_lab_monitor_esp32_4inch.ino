@@ -669,7 +669,7 @@ void drawRightPanel() {
   tft.drawRect(sx, y, CARD_W, clockH, DIVIDER_COLOR);
 
   tft.setTextColor(TEMP_COLOR); tft.setTextSize(1);
-  tft.setCursor(sx + CARD_PAD, y + CARD_PAD); tft.print("CLOCK DHT11");
+  tft.setCursor(sx + CARD_PAD, y + CARD_PAD); tft.print("CLOCK DHT22");
 
   if (isnan(clockTemp)) {
     tft.setTextColor(FAIL_COLOR); tft.setCursor(sx + CARD_PAD, y + 24);

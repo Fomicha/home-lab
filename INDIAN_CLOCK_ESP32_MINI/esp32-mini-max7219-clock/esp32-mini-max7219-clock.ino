@@ -12,19 +12,20 @@
 
 #define HARDWARE_TYPE MD_MAX72XX::FC16_HW
 #define MAX_DEVICES 4
-#define DHTTYPE DHT11
+#define DHTTYPE DHT22
 
 #define CLK_PIN   4    // or SCK
 #define DATA_PIN  6    // or MOSI
 #define CS_PIN    7    // or SS
 #define LDR_PIN   0    // Photoresistor (ADC)
-#define DHTPIN    2    // DHT11 DATA
+#define DHTPIN    2    // DHT22 DATA
+#define LED_PIN   8    // Built-in blue LED on ESP32-C3 Mini
 
 MD_Parola P = MD_Parola(HARDWARE_TYPE, DATA_PIN, CLK_PIN, CS_PIN, MAX_DEVICES);
 DHT dht(DHTPIN, DHTTYPE);
 
 // ===== MQTT for Home Assistant =====
-#define MQTT_DEVICE_ID     "livingroom_clock_dht11"
+#define MQTT_DEVICE_ID     "livingroom_clock_dht22"
 #define MQTT_STATE_TOPIC   "home/living-room/clock-sensor/state"
 #define MQTT_AVAIL_TOPIC   "home/living-room/clock-sensor/status"
 
@@ -394,7 +395,7 @@ void publishMqttDiscovery() {
     payload += "\"ids\":[\"" MQTT_DEVICE_ID "\"],";
     payload += "\"name\":\"Living Room Clock Sensor\",";
     payload += "\"mf\":\"DIY\",";
-    payload += "\"mdl\":\"ESP32-C3 Mini + DHT11\"";
+    payload += "\"mdl\":\"ESP32-C3 Mini + DHT22\"";
     payload += "}}";
 
     mqtt.publish(topic.c_str(), payload.c_str(), true);
@@ -434,6 +435,11 @@ void setup(void) {
   P.setInvert(false);
   P.addChar('$', degC);
 
+  // Turn on built-in LED (visible through transparent PETG case)
+  // Note: ESP32-C3 Mini LED is active LOW (LOW = ON)
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, LOW);
+
   showLoader(LOADER_DOTS_ONLY, nullptr, 3000);
 
   connectToWiFi(ssid, password);
@@ -449,7 +455,7 @@ void setup(void) {
   connectMQTT();
 
   dht.begin();
-  delay(2000);  // DHT11 needs time to stabilize
+  delay(2000);  // DHT22 needs time to stabilize
   updateSensorReadings();
   publishSensorData();
   updateTimeVarsOnly();
