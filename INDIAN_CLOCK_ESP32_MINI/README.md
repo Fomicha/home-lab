@@ -2,19 +2,25 @@
 
 A smart LED dot-matrix clock built on ESP32-C3 Mini with a 4-module MAX7219 display, DHT22 temperature/humidity sensor, KY-018 photoresistor for auto-brightness, and full Home Assistant integration via MQTT.
 
-Designed to fit inside a 3D-printed transparent PETG case.
+![Clock in transparent case at night](img/3.jpg)
 
 **3D Model:** [MakerWorld link here]
+
+## Gallery
+
+| Daylight | Night Glow | Off |
+|----------|------------|-----|
+| ![Daylight](img/1.jpg) | ![Night](img/3.jpg) | ![Off](img/2.jpg) |
 
 ## Features
 
 - **NTP Clock** -- auto-synced time with 7-segment font, flashing colon separator
 - **DHT22 Sensor** -- temperature and humidity displayed in rotation with the clock
-- **Automatic Brightness** -- LDR photoresistor adjusts display brightness based on ambient light
+- **Automatic Brightness** -- KY-018 photoresistor adjusts display brightness based on ambient light
 - **Night Sleep Mode** -- display and WiFi turn off between 00:00--08:00, wake up automatically
 - **MQTT to Home Assistant** -- auto-discovery, publishes temperature, humidity, and WiFi RSSI every 2 minutes
 - **OTA Updates** -- firmware updates over WiFi (no USB needed after first flash)
-- **Built-in LED** -- blue LED on ESP32-C3 glows through transparent case
+- **Built-in LED** -- ESP32-C3 onboard LED always on as status indicator
 - **Animated Transitions** -- scroll, mesh, blinds, and grow effects between clock/date/temp/humidity screens
 - **Boot Loader Animation** -- dot animation and status messages during WiFi/NTP connection
 - **Portugal Timezone** -- WET/WEST with automatic DST switching (last Sunday of March/October)
@@ -29,6 +35,12 @@ Designed to fit inside a 3D-printed transparent PETG case.
 | 4 | Humidity (e.g. "H: 45 %") | ~3 seconds |
 
 ## Hardware
+
+### Wiring Schematic
+
+![Fritzing schematic](img/fritzing_schema.png)
+
+### Pinout
 
 | Component | Pin |
 |-----------|-----|
