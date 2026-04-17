@@ -2,7 +2,7 @@
 
 A smart LED dot-matrix clock built on ESP32-C3 Mini with a MAX7219 display matrix module 8*32, DHT22 temperature/humidity sensor, KY-018 photoresistor for auto-brightness, and full Home Assistant integration via MQTT.
 
-![Clock in transparent case at night](img/3.jpg)
+<img src="img/3.jpg" alt="Clock in transparent case at night" width="400">
 
 **3D Model:** [MakerWorld link here]
 

@@ -1,88 +1,67 @@
-# ESP32 Годинник з MAX7219 дисплеєм
+# ESP32 LED Clock with MAX7219 (Prototype)
 
-Цей проект реалізує цифровий годинник на базі ESP32 з MAX7219 LED матрицею, датчиком температури та вологості DHT11, та автоматичною регулюванням яскравості. Оптимізований для економії батареї.
+> **This is the prototype version** built on an ESP32 DevKit development board for testing and iteration. The final production version using the compact ESP32-C3 Mini is in [`INDIAN_CLOCK_ESP32_MINI`](../INDIAN_CLOCK_ESP32_MINI/).
 
-## 🚀 Функціональність
+A digital clock based on ESP32 with a 4-module MAX7219 LED dot-matrix display, DHT11 temperature/humidity sensor, and automatic brightness adjustment via LDR photoresistor.
 
-- **Цифровий годинник** з синхронізацією через NTP
-- **Відображення температури** та вологості
-- **Економія батареї** - низька яскравість дисплею
-- **Режим сну** вночі для економії енергії
-- **WiFi підключення** з автоматичним перепідключенням
+## Features
 
-## 📋 Компоненти
+- **NTP Clock** -- time synchronization via WiFi
+- **Temperature & Humidity** -- DHT11 sensor readings displayed in rotation
+- **Auto Brightness** -- LDR photoresistor adjusts display based on ambient light
+- **Night Sleep Mode** -- turns off display and WiFi between 00:00--08:00
+- **Animated Transitions** -- scroll, mesh, and blinds effects between screens
+- **Low Power** -- brightness capped at level 1 for battery operation
 
-- ESP32 DevKit
-- MAX7219 LED матриця (4 модулі)
-- DHT11 датчик температури та вологості
-- LDR (фоторезистор) для автоматичної яскравості
-- Дроти для підключення
+## Pinout (ESP32 DevKit)
 
-## 🔌 Підключення
-
-| Компонент | ESP32 Pin |
-|-----------|-----------|
+| Component | Pin |
+|-----------|-----|
 | MAX7219 CLK | GPIO 18 |
 | MAX7219 DATA | GPIO 23 |
 | MAX7219 CS | GPIO 15 |
-| DHT11 | GPIO 4 |
+| DHT11 DATA | GPIO 4 |
 | LDR | GPIO 34 (ADC) |
 
-## 📚 Бібліотеки
+## Libraries
 
-Встановіть наступні бібліотеки через Arduino IDE:
-- `WiFi.h` (вбудована в ESP32)
-- `time.h` (вбудована)
-- `MD_Parola` (встановити через Library Manager)
-- `SPI.h` (вбудована)
-- `DHT sensor library` (встановити через Library Manager)
+- `MD_Parola` / `MD_MAX72XX` -- LED matrix driver & animations
+- `DHT sensor library` (Adafruit)
+- `WiFi.h`, `time.h`, `SPI.h` -- built-in with ESP32 core
 
-## ⚙️ Налаштування
+## Configuration
 
-1. **WiFi налаштування:**
-   ```cpp
-   const char* ssid = "ВАША_МЕРЕЖА";
-   const char* password = "ВАШ_ПАРОЛЬ";
-   ```
+WiFi credentials loaded from shared config:
 
-2. **Часова зона (Португалія):**
-   ```cpp
-   const int TIMEZONE_IN_SECONDS = 3600; // UTC+1 (літній час)
-   // Для зимового часу: 0 (UTC+0)
-   ```
+```cpp
+#include "../../config/secrets.h"
+```
 
-3. **Економія батареї:**
-   ```cpp
-   const int MAX_BRIGHTNESS = 1;  // Низька яскравість
-   const int MIN_BRIGHTNESS = 1;  // Мінімальна яскравість
-   ```
+### Timezone
 
-4. **Режим сну:**
-   ```cpp
-   #define NIGHT_HOUR_START 0   // Початок ночі (години)
-   #define NIGHT_MIN_START 0    // Початок ночі (хвилини)
-   #define NIGHT_HOUR_END 8     // Кінець ночі (години)
-   #define NIGHT_MIN_END 0      // Кінець ночі (хвилини)
-   ```
+```cpp
+const int TIMEZONE_IN_SECONDS = 3600; // UTC+1 (Portugal summer time)
+```
 
-## 🔧 Налагодження
+### Sleep Schedule
 
-- Відкрийте Serial Monitor на швидкості 115200 baud
-- Всі повідомлення мають префікси: `[WiFi]`, `[NTP]`, `[TEMP]`, `[HUM]`, `[SLEEP]`
+```cpp
+#define NIGHT_HOUR_START 0   // sleep at 00:00
+#define NIGHT_HOUR_END   8   // wake at 08:00
+```
 
-## 📝 Особливості
+## What Changed in the Mini Version
 
-- **Економія батареї** - низька яскравість дисплею (рівень 1)
-- **Автоматичне оновлення даних** кожні 15 хвилин
-- **Показ часу** протягом 60 секунд, потім температура та вологість
-- **Економія енергії** - вимикає WiFi та дисплей вночі
-- **Стійкість до помилок** - повторні спроби зчитування датчиків
+The [ESP32-C3 Mini version](../INDIAN_CLOCK_ESP32_MINI/) adds:
 
-## 🐛 Відомі проблеми
+- DHT22 sensor (0.1C resolution vs 1C on DHT11)
+- MQTT integration with Home Assistant auto-discovery
+- OTA firmware updates over WiFi
+- KY-018 photoresistor module (replaces bare LDR)
+- Proper timezone handling with DST (WET/WEST)
+- Built-in LED as status indicator
+- 3D-printed case
 
-- Помилки лінтера пов'язані з налаштуваннями Arduino IDE (нормально для Arduino проектів)
-- При першому запуску може знадобитися кілька хвилин для синхронізації часу
+## License
 
-## 📄 Ліцензія
-
-Цей проект розповсюджується під ліцензією MIT. 
+MIT
