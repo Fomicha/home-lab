@@ -1,6 +1,6 @@
 # ESP32-C3 Mini LED Clock with DHT22 & Home Assistant
 
-A smart LED dot-matrix clock built on ESP32-C3 Mini with a 4-module MAX7219 display, DHT22 temperature/humidity sensor, KY-018 photoresistor for auto-brightness, and full Home Assistant integration via MQTT.
+A smart LED dot-matrix clock built on ESP32-C3 Mini with a MAX7219 display matrix module 8*32, DHT22 temperature/humidity sensor, KY-018 photoresistor for auto-brightness, and full Home Assistant integration via MQTT.
 
 ![Clock in transparent case at night](img/3.jpg)
 
@@ -53,8 +53,8 @@ A smart LED dot-matrix clock built on ESP32-C3 Mini with a 4-module MAX7219 disp
 
 ### Components
 
-- ESP32-C3 Mini (e.g. Lolin C3 Mini)
-- 4x MAX7219 8x8 LED matrix modules (FC16 type)
+- ESP32-C3 Mini
+- MAX7219 8x32 LED matrix modules
 - DHT22 temperature & humidity sensor
 - KY-018 photoresistor module
 
