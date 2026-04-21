@@ -103,6 +103,14 @@ const int MIN_BRIGHTNESS = 1;
 #define SENSOR_UPDATE_INTERVAL 900000UL  // 15 minutes
 ```
 
+## Wokwi Simulation
+
+Try the circuit in your browser (view only) or run locally with the VS Code Wokwi extension + PlatformIO:
+
+🔗 [Open in Wokwi](https://wokwi.com/projects/461828199738872833)
+
+> **Note:** The free Wokwi web version cannot build this project online — the firmware compilation exceeds the free tier time limit. To simulate, build locally with PlatformIO and run via the [Wokwi VS Code extension](https://docs.wokwi.com/vscode/getting-started).
+
 ## License
 
 MIT

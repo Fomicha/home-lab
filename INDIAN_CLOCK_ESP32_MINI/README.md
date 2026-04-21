@@ -134,6 +134,14 @@ Install via Arduino IDE Library Manager:
 
 115200 baud. Log prefixes: `[WiFi]`, `[NTP]`, `[TEMP]`, `[HUM]`, `[SLEEP]`, `[MQTT]`, `[OTA]`, `[CLOCK_IP]`
 
+## Wokwi Simulation
+
+Try the circuit in your browser (view only) or run locally with the VS Code Wokwi extension + PlatformIO:
+
+🔗 [Open in Wokwi](https://wokwi.com/projects/461828199738872833)
+
+> **Note:** The free Wokwi web version cannot build this project online — the firmware compilation exceeds the free tier time limit. To simulate, build locally with PlatformIO and run via the [Wokwi VS Code extension](https://docs.wokwi.com/vscode/getting-started).
+
 ## License
 
 MIT
