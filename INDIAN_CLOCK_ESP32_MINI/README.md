@@ -4,7 +4,7 @@ A smart LED dot-matrix clock built on ESP32-C3 Mini with a MAX7219 display matri
 
 <img src="img/3.jpg" alt="Clock in transparent case at night" width="400">
 
-**3D Model:** [MakerWorld link here]
+**3D Model:** [[MakerWorld link here](https://makerworld.com/en/models/2702186-led-matrix-desk-clock)]
 
 ## Gallery
 
@@ -54,7 +54,7 @@ A smart LED dot-matrix clock built on ESP32-C3 Mini with a MAX7219 display matri
 ### Components
 
 - ESP32-C3 Mini
-- MAX7219 8x32 LED matrix modules
+- MAX7219 8x32 LED matrix module (FC16 type)
 - DHT22 temperature & humidity sensor
 - KY-018 photoresistor module
 

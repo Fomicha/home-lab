@@ -1,12 +1,12 @@
 # ESP32-C3 Mini LED Clock with DHT22
 
-A smart LED dot-matrix clock built on ESP32-C3 Mini with a 4-module MAX7219 display, DHT22 temperature/humidity sensor, and KY-018 photoresistor for auto-brightness.
+A smart LED dot-matrix clock built on ESP32-C3 Mini with a MAX7219 8x32 LED matrix, DHT22 temperature/humidity sensor, and KY-018 photoresistor for auto-brightness.
 
 WiFi is used only for NTP time sync on boot, then disconnected to save power.
 
 <img src="3.jpg" alt="Clock at night" width="400">
 
-**3D Model:** [MakerWorld link here]
+**3D Model:** [[MakerWorld link here](https://makerworld.com/en/models/2702186-led-matrix-desk-clock)]
 
 ## Gallery
 
@@ -52,7 +52,7 @@ WiFi is used only for NTP time sync on boot, then disconnected to save power.
 ### Components
 
 - ESP32-C3 Mini
-- 4x MAX7219 8x8 LED matrix modules (FC16 type)
+- MAX7219 8x32 LED matrix module (FC16 type)
 - DHT22 temperature & humidity sensor
 - KY-018 photoresistor module
 
